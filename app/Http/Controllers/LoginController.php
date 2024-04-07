@@ -17,7 +17,7 @@ class LoginController extends Controller
         $request->validate([
             'email' => 'required',
             'password' => 'required',
-        
+
         ], [
             'email.required' => 'email wajib di isi!',
             'password.required' => 'password wajib di isi!',
@@ -28,10 +28,25 @@ class LoginController extends Controller
             'password' => $request->password,
         ];
 
-        if(Auth::attempt($infologin)) {
-            return redirect('dashboard');
+        if (Auth::attempt($infologin)) {
+            if (Auth::user()->role == 'admin') {
+                return redirect('/dashboard/admin');
+            } else {
+                return redirect('/dashboard/client');
+            }
+
+            // return redirect('dashboard');
         } else {
             return redirect('')->withErrors('Email dan Password Tidak Sesuai')->withInput();
         }
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        // request()->session()->invalidate();
+        // request()->session()->regenerateToken();
+
+        return redirect('');
     }
 }

@@ -7,9 +7,12 @@ use Illuminate\Support\Facades\Auth;
 
 class DashboardAdminController extends Controller
 {
-    public function index()
+    public function adminindex()
     {
-        echo "haloo selamat datang";
-        echo "<h1>" . Auth::user()->name . "</h1>";
+        return view('admin.dashboard');
+    }
+    public function clientindex()
+    {
+        return view('client.dashboard');
     }
 }
