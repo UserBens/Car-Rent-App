@@ -1,42 +1,4 @@
-<!--
-=========================================================
-* Soft UI Dashboard - v1.0.3
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://www.creative-tim.com/license)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
--->
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
-    <link rel="icon" type="image/png" href="../assets/img/favicon.png">
-    <title>
-        Car-Rent | Admin Car
-    </title>
-    <!--     Fonts and icons     -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-    <!-- Nucleo Icons -->
-    <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
-    <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
-    <!-- Font Awesome Icons -->
-    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-    <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
-    <!-- CSS Files -->
-    <link id="pagestyle" href="{{ asset('assets') }}/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet" />
-</head>
-
-<body class="g-sidenav-show  bg-gray-100">
+<div class="container-admin-car">
     <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 "
         id="sidenav-main">
         <div class="sidenav-header">
@@ -79,7 +41,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="{{ route('car.index') }}">
+                    <a class="nav-link active" href="#">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1"
@@ -139,114 +101,159 @@
                         <span class="nav-link-text ms-1">User</span>
                     </a>
                 </li>
-                
-               
+
+
             </ul>
         </div>
 
     </aside>
 
     <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">
-        <!-- Navbar -->
-        <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur"
-            navbar-scroll="true">
-            <div class="container-fluid py-1 px-3">
-                <nav aria-label="breadcrumb">
+        <nav
+            class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl position-sticky blur shadow-blur mt-4 left-auto top-1 z-index-sticky">
+            <div class="container">
+                <a class="navbar-brand" href="" rel="tooltip" data-placement="bottom" target="_blank">
                     <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                        <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark"
-                                href="javascript:;">Pages</a></li>
-                        <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Dashboard</li>
+                        <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a>
+                        </li>
+                        <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Product</li>
                     </ol>
-                    <h6 class="font-weight-bolder mb-0">Dashboard</h6>
-                </nav>
-                <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-                    <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-                        <div class="input-group">
-                            <span class="input-group-text text-body"><i class="fas fa-search"
-                                    aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" placeholder="Type here...">
-                        </div>
-                    </div>
-                    <ul class="navbar-nav  justify-content-end">
-                        <li class="nav-item d-flex align-items-center">
-                            <a href="javascript:;" class="nav-link text-body font-weight-bold px-0">
-                                {{-- <i class="fa fa-user me-sm-1"></i> --}}
-                                {{-- <span class="d-sm-inline d-none">Sign In</span> --}}
-                                <div class="flex">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
+                    aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navigation">
+                    <ul class="navbar-nav navbar-nav-hover ms-auto">
+                        <div class="row">
+
+                            <div class="col-auto">
+                                <div class="bg-white border-radius-lg d-flex me-2">
                                     <form action="/logout" method="POST">
                                         @csrf
-                                        <button class="btn bg-gradient-primary w-100 px-3 mb-2 active"
-                                            data-class="bg-transparent" onclick="sidebarType(this)">Logout</button>
+                                        <button class="btn bg-gradient-primary my-1 me-1">Logout</button>
                                     </form>
-
                                 </div>
-                            </a>
-                        </li>
+                            </div>
+                        </div>
                     </ul>
                 </div>
             </div>
         </nav>
         <!-- End Navbar -->
+        <!-- End Navbar -->
         <div class="container-fluid py-4">
+            @if ($errors->any())
+                <div class="pt-3">
+                    <div class="alert alert-primary text-white">
+                        <ul>
+                            @foreach ($errors->all() as $item)
+                                <li>{{ $item }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            @endif
+
+            @if (session()->has('message'))
+                <div class="pt-3">
+                    <div class="alert alert-success text-white">
+                        {{ session('message') }}
+                    </div>
+                </div>
+            @endif
             <div class="row">
+                {{-- start form input --}}
                 <div class="col-12">
                     <div class="card mb-4">
                         <div class="card-header pb-0">
-                            <h6>Authors table</h6>
+                            <h6>Tambah Data Mobil</h6>
+                        </div>
+                        <form>
+                            <div class="form-group m-4">
+                                <label for="example-text-input" class="form-control-label">Merk Mobil</label>
+                                <input type="text" class="form-control" id="merk_mobil" wire:model="merk_mobil">
+                            </div>
+
+                            <div class="form-group m-4">
+                                <label for="example-text-input" class="form-control-label">Plat Nomer Mobil</label>
+                                <input class="form-control" type="text" id="example-text-input"
+                                    wire:model="plat_nomer">
+                            </div>
+
+                            <div class="form-group m-4">
+                                <label for="example-datetime-local-input" class="form-control-label">Tahun
+                                    Mobil</label>
+                                <input class="form-control" type="datetime-local" id="example-datetime-local-input"
+                                    wire:model="tahun_mobil">
+                            </div>
+
+                            <div class="form-group m-4">
+                                <label for="example-text-input" class="form-control-label">Kategori Mobil</label>
+                                <input class="form-control" type="text" id="example-text-input"
+                                    wire:model="kategori_mobil">
+                            </div>
+
+                            <div class="form-group m-4">
+                                <label for="example-text-input" class="form-control-label">Harga</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">Rp.</span>
+                                    <input type="text" class="form-control" wire:model="harga_sewa">
+                                    <span class="input-group-text">.00</span>
+                                </div>
+                            </div>
+
+                            <div class="m-4">
+                                <button type="button" class="btn btn-primary" name="submit"
+                                    wire:click="store()">SIMPAN</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                {{-- end form input --}}
+
+                <div class="col-12">
+                    <div class="card mb-4">
+                        <div class="card-header pb-0">
+                            <h6>Data Mobil</h6>
                         </div>
                         <div class="card-body px-0 pt-0 pb-2">
-                            <div class="table-responsive p-0">
+                            <div class="table-responsive">
                                 <table class="table align-items-center mb-0">
                                     <thead>
                                         <tr>
-                                            <th
-                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                Author</th>
-                                            <th
-                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                                Function</th>
-                                            <th
-                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                Status</th>
-                                            <th
-                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                Employed</th>
-                                            <th class="text-secondary opacity-7"></th>
+                                            <th class="col-md-1"></th>
+                                            <th class="col-md-1">No</th>
+                                            <th class="col-md-1 sort @if($sortColumn == 'merk_mobil') {{ $sortDirection }} @endif" wire:click="sort('merk_mobil')">Merk Mobil</th>
+                                            <th class="col-md-1 sort @if($sortColumn == 'plat_nomer') {{ $sortDirection }} @endif" wire:click="sort('plat_nomer')">Plat Nomer</th>
+                                            <th class="col-md-1 sort @if($sortColumn == 'tahun_mobil') {{ $sortDirection }} @endif" wire:click="sort('tahun_mobil')">Tahun Mobil</th>
+                                            <th class="col-md-1 sort @if($sortColumn == 'ketgori_mobil') {{ $sortDirection }} @endif" wire:click="sort('ketgori_mobil')">Kategori Mobil</th>
+                                            <th class="col-md-2 sort @if($sortColumn == 'harga_sewa') {{ $sortDirection }} @endif" wire:click="sort('harga_sewa')">Harga Sewa</th>
+                                            <th class="col-md-1">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex px-2 py-1">
-                                                    <div>
-                                                        <img src="{{ asset('assets') }}/img/team-2.jpg"
-                                                            class="avatar avatar-sm me-3" alt="user1">
-                                                    </div>
-                                                    <div class="d-flex flex-column justify-content-center">
-                                                        <h6 class="mb-0 text-sm">John Michael</h6>
-                                                        <p class="text-xs text-secondary mb-0">john@creative-tim.com
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <p class="text-xs font-weight-bold mb-0">Manager</p>
-                                                <p class="text-xs text-secondary mb-0">Organization</p>
-                                            </td>
-                                            <td class="align-middle text-center text-sm">
-                                                <span class="badge badge-sm bg-gradient-success">Online</span>
-                                            </td>
-                                            <td class="align-middle text-center">
-                                                <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
-                                            </td>
-                                            <td class="align-middle">
-                                                <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
-                                                    data-toggle="tooltip" data-original-title="Edit user">
-                                                    Edit
-                                                </a>
-                                            </td>
-                                        </tr>
-                                     
+                                        @foreach ($dataCars as $key => $item)
+                                            <tr>
+                                                <td><input type="checkbox" wire:key="{{ $item->id }}"
+                                                        value="{{ $item->id }}"
+                                                        wire:model.live="employee_selected_id"></td>
+                                                <td>{{ $dataCars->firstItem() + $key }}</td>
+                                                <td>{{ $item->merk_mobil }}</td>
+                                                <td>{{ $item->plat_nomer }}</td>
+                                                <td>{{ $item->tahun_mobil }}</td>
+                                                <td>{{ $item->kategori_mobil }}</td>
+                                                <td>{{ $item->harga_sewa }}</td>
+                                                <td>
+                                                    <a wire:click="edit({{ $item->id }})"
+                                                        class="btn btn-warning btn-sm">Edit</a>
+                                                    <a wire:click="deleteconfirm({{ $item->id }})"
+                                                        class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                                        data-bs-target="#exampleModal">Del</a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+
                                     </tbody>
                                 </table>
                             </div>
@@ -319,53 +326,56 @@
                                                 </button>
                                             </td>
                                         </tr>
-      
+
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <footer class="footer pt-3  ">
-                <div class="container-fluid">
-                    <div class="row align-items-center justify-content-lg-between">
-                        <div class="col-lg-6 mb-lg-0 mb-4">
-                            <div class="copyright text-center text-sm text-muted text-lg-start">
-                                ©
-                                <script>
-                                    document.write(new Date().getFullYear())
-                                </script>,
-                                made with <i class="fa fa-heart"></i> by
-                                <a href="https://www.creative-tim.com" class="font-weight-bold"
-                                    target="_blank">Creative Tim</a>
-                                for a better web.
+
+
+
+
+                <footer class="footer pt-3  ">
+                    <div class="container-fluid">
+                        <div class="row align-items-center justify-content-lg-between">
+                            <div class="col-lg-6 mb-lg-0 mb-4">
+                                <div class="copyright text-center text-sm text-muted text-lg-start">
+                                    ©
+                                    <script>
+                                        document.write(new Date().getFullYear())
+                                    </script>,
+                                    made with <i class="fa fa-heart"></i> by
+                                    <a href="https://www.creative-tim.com" class="font-weight-bold"
+                                        target="_blank">Creative Tim</a>
+                                    for a better web.
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <ul class="nav nav-footer justify-content-center justify-content-lg-end">
+                                    <li class="nav-item">
+                                        <a href="https://www.creative-tim.com" class="nav-link text-muted"
+                                            target="_blank">Creative Tim</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="https://www.creative-tim.com/presentation"
+                                            class="nav-link text-muted" target="_blank">About Us</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="https://creative-tim.com/blog" class="nav-link text-muted"
+                                            target="_blank">Blog</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="https://www.creative-tim.com/license"
+                                            class="nav-link pe-0 text-muted" target="_blank">License</a>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
-                        <div class="col-lg-6">
-                            <ul class="nav nav-footer justify-content-center justify-content-lg-end">
-                                <li class="nav-item">
-                                    <a href="https://www.creative-tim.com" class="nav-link text-muted"
-                                        target="_blank">Creative Tim</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="https://www.creative-tim.com/presentation" class="nav-link text-muted"
-                                        target="_blank">About Us</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="https://creative-tim.com/blog" class="nav-link text-muted"
-                                        target="_blank">Blog</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted"
-                                        target="_blank">License</a>
-                                </li>
-                            </ul>
-                        </div>
                     </div>
-                </div>
-            </footer>
-        </div>
+                </footer>
+            </div>
     </main>
     <div class="fixed-plugin">
         <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
@@ -449,24 +459,4 @@
             </div>
         </div>
     </div>
-    <!--   Core JS Files   -->
-    <script src="{{ asset('assets') }}/js/core/popper.min.js"></script>
-    <script src="{{ asset('assets') }}/js/core/bootstrap.min.js"></script>
-    <script src="{{ asset('assets') }}/js/plugins/perfect-scrollbar.min.js"></script>
-    <script src="{{ asset('assets') }}/js/plugins/smooth-scrollbar.min.js"></script>
-    <script>
-        var win = navigator.platform.indexOf('Win') > -1;
-        if (win && document.querySelector('#sidenav-scrollbar')) {
-            var options = {
-                damping: '0.5'
-            }
-            Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-        }
-    </script>
-    <!-- Github buttons -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
-    <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-    <script src="{{ asset('assets') }}/js/soft-ui-dashboard.min.js?v=1.0.3"></script>
-</body>
-
-</html>
+</div>

@@ -11,6 +11,7 @@ class DashboardAdminController extends Controller
     {
         return view('admin.dashboard');
     }
+
     public function clientindex()
     {
         return view('client.dashboard');

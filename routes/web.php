@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardAdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductCarAdminController;
+use App\Livewire\Admincar;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,8 +27,14 @@ Route::get('/home', function () {
 });
 
 Route::middleware(['auth'])->group(function () {
+    // Route::get('/dashboard/admin', DashboardAdminController::class, 'adminindex')->middleware('userakses:admin')->name('dashboard-admin');
+
     Route::get('/dashboard/admin', [DashboardAdminController::class, 'adminindex'])->middleware('userakses:admin')->name('dashboard-admin');
-    Route::resource('/dashboard/admin/car', ProductCarAdminController::class)->middleware('userakses:admin');
+
+    Route::get('/dashboard/admin/car', function () {
+        return view('components.admincar.app');
+    })->middleware('userakses:admin')->name('admincar');
+
     Route::get('/dashboard/client', [DashboardAdminController::class, 'clientindex'])->middleware('userakses:client');
     Route::get('/logout', [LoginController::class, 'logout']);
     Route::post('/logout', [LoginController::class, 'logout']);
