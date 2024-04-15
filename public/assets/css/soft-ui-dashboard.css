@@ -23190,7 +23190,7 @@ p,
 }
 
 .text-xxs {
-  font-size: 0.65rem !important;
+  font-size: 0.70rem !important;
 }
 
 p {
@@ -23241,7 +23241,7 @@ p {
 }
 
 .font-weight-bolder {
-  font-weight: 700 !important;
+  /* font-weight: 700 !important; */
 }
 
 .font-italic {
